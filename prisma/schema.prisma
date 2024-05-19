@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model Grants {
+  id Int @default(autoincrement()) @id
+  email String
+  accessToken String
+  grantId String
+  expiresIn Int
+  scope String
+}
+
+model Emails {
+  id Int @default(autoincrement()) @id
+  type String
+  source String
+  emailBody String
+  folders String? // "inbox,spam,sent..."
+  from String // "walter@example.com,lilo@example.com"
+  subject String
+  threadId String
+  to String // "person@example.com,person2@example.com..."
+  unread Boolean
+  grantId String
+}
